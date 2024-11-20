@@ -1,0 +1,90 @@
+<div class="order-body-bg">
+  <div class="order-body">
+    <h2>My Orders</h2>
+    <div *ngIf="myOrders.length === 0" class="no-orders">
+      <img src="../../assets/dish_images/no-result.jpg">
+      <p> Place an order to fill it up with deliciousness!.</p>
+    </div>
+    <div class="order-session" *ngFor="let order of myOrders">
+      <div class="order-card">
+        <div class="order-header">
+          <img [src]="'../../assets/restaurant_images/'+order.restaurant_image_url" alt="Restaurant Image"
+            class="restaurant-image">
+          <div class="order-info">
+            <div class="order-status">
+              <h3>{{ order.restaurant_name }}</h3>
+              <div class="delivery-status">
+                <p>Delivered on {{ formatDate(order.order_time  ) }}</p>
+                <span class="status-delivered">✔</span>
+              </div>
+            </div>
+
+            <p>{{ order.restaurant_address }}</p>
+            <p>ORDER #{{ order.order_id }}</p>
+            <p> {{ formatDate(order.order_time) }}</p>
+          </div>
+        </div>
+
+        <div class="order-details">
+          <div class="dishes-container">
+            <div class="dish" *ngFor="let item of order.order_dishes">
+              <p>{{ item.dish_name }} x {{item.dish_quantity}}</p>
+            </div>
+          </div>
+          <p class="total-price">Total:{{order.order_price |currency:'INR'}}</p>
+        </div>
+
+        <div class="order-actions">
+          <div *ngIf="!order.is_reviewed">
+            <!-- Button to toggle the review form for each restaurant -->
+            <button ngClass="btn btn-dark" (click)="toggleReviewForm(order.order_id)" *ngIf="!showForm[order.order_id]"
+              class="">
+              RATE US
+            </button>
+          </div>
+          <div *ngIf="order.is_reviewed">
+            <div class="review-container">
+              <p class="review-description">
+                Description: {{ order.review_data.review_description | slice:0:30 }}...
+              </p>
+              <p class="review-rating">
+                You Rated: <span class="rating-value">{{ order.review_data.rating_value }}</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Review Form -->
+          <div *ngIf="showForm[order.order_id]" class="review-form">
+            <!-- Text area for review description -->
+            <textarea [(ngModel)]="reviewDescription[order.order_id]" placeholder="Write your review here">
+          </textarea>
+
+            <!-- Star rating selection -->
+            <div class="rating-container">
+              <i *ngFor="let star of stars; let i = index" (click)="selectRating(order.order_id, i + 1)" [ngClass]="{
+                'fa-solid': reviewRating[order.order_id] >= i+1,
+                'fa-regular': reviewRating[order.order_id] <= i || reviewRating[order.order_id] == null
+              }" class="fa-star">
+              </i>
+            </div>
+
+            <div class="like-button">
+              <!-- Like button -->
+              <i (click)="toggleLike(order.order_id)" [ngClass]="{
+              'fa-solid': reviewLiked[order.order_id],
+              'fa-regular': !reviewLiked[order.order_id]
+            }" class="fa-thumbs-up">
+              </i>
+
+              <!-- Submit review button -->
+              <button class="btn btn-primary p-1" (click)="submitReview(order.order_id,order.restaurant_id)">
+                Submit Review
+              </button>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,162 @@
+<div>
+  <div class="button">
+    <button class="add-dish-button" (click)="displayForm()" enctype="multipart/form-data"> Add Dish</button>
+  </div>
+  <!-- Dish Registration Form -->
+  <div class="dish-form-container" *ngIf="showDishForm" [class.show]="showDishForm">
+    <span class="close-icon" (click)="cancelForm()">&#10005;</span>
+    <form [formGroup]="dishRegisterForm" (ngSubmit)="onDishSubmit()">
+      <div class="form-group">
+        <label for="dishName">Dish Name</label>
+        <input type="text" id="dishName" formControlName="dishName" placeholder="Enter dish name">
+      </div>
+      <div class="form-group">
+        <label for="dishType">Dish Type</label>
+        <select id="dishType" formControlName="dishType">
+          <option value="Veg">Veg</option>
+          <option value="Non-Veg">Non-Veg</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="dishDescription">Dish Description</label>
+        <textarea id="dishDescription" formControlName="dishDescription"
+          placeholder="Enter dish description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="dishPrice">Dish Price (₹)</label>
+        <input type="number" id="dishPrice" formControlName="dishPrice" placeholder="Enter price">
+      </div>
+
+      <div class="form-group">
+        <label for="inventory">Inventory</label>
+        <input type="number" id="inventory" formControlName="inventory" placeholder="Enter inventory quantity">
+      </div>
+
+      <div class="form-group">
+        <label for="available">Available</label>
+        <select id="available" formControlName="available">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dishImageurl">Dish Image URL</label>
+        <input type="file" id="dishImageurl" formControlName="dishImageurl" (change)="onFileChange($event)"
+          placeholder="Enter image URL">
+        <div *ngIf=" fileErrorMessage" class="error-message">{{ fileErrorMessage }}</div>
+      </div>
+
+      <div class="gapbutton">
+        <button type="submit" class="submit-button" [disabled]="!dishRegisterForm.valid">Submit</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+      </div>
+      <div *ngIf="errorMessage" class="error-message">{{errorMessage }}</div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="!Mydishes || Mydishes.length === 0" class="no-dishes">
+  <img src="../../assets/dish_images/no-result.jpg">
+  <p>No Dishes found.</p>
+</div>
+
+<!--dish table-->
+<div *ngIf="Mydishes && Mydishes.length > 0">
+  <div class="dish-container-bg">
+    <div class="restaurant-header">
+      <h2 class="restaurant-title">{{ Mydishes[0].restaurant_name | titlecase }} Dishes</h2>
+    </div>
+    <!-- Dish Table -->
+    <table class="dish-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Dish Name</th>
+          <th>Dish Type</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Inventory</th>
+          <th>Available</th>
+          <th>Action</th>
+          <!-- <th>Delete</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dish of Mydishes" [class.low-inventory]="dish.is_empty">
+          <td>
+            <img src="../../assets/dish_images/{{dish.dish_image_url}}" alt="{{ dish.dish_name }}" class="dish-image">
+          </td>
+          <td>{{ dish.dish_name }}</td>
+          <td>{{ dish.dish_type }}</td>
+          <td>₹ {{ dish.dish_price }}</td>
+          <td>{{ dish.dish_description }}</td>
+          <td>{{ dish.inventory }}</td>
+          <td>{{ dish.available }}</td>
+          <td><button type="button" class="btn btn-primary" (click)="edit(dish)">Edit</button></td>
+          <!-- <td><button type="button" class="btn btn-primary" (click)="deleteDish(dish.dish_id)">Remove</button></td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!--Edit dish-->
+<div class="modal-overlay" *ngIf="showEditForm">
+  <div class="modal-content">
+    <span class="close-icon" (click)="cancelEditForm()">&#10005;</span>
+    <h2>Edit Dish</h2>
+
+    <form [formGroup]="dishEditForm" (ngSubmit)="saveDish()">
+      <div class="form-group">
+        <label for="dishId">Dish ID</label>
+        <input formControlName="dishId" id="dishId" type="text" class="form-control" [readonly]="true">
+      </div>
+
+      <div class="form-group">
+        <label for="dishName">Dish Name</label>
+        <input formControlName="dishName" id="dishName" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="dishType">Dish Type</label>
+        <select formControlName="dishType" id="dishType" class="form-control">
+          <option [ngValue]="'Veg'">Veg</option>
+          <option [ngValue]="'Non-Veg'">Non-Veg</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dishDescription">Dish Description</label>
+        <textarea formControlName="dishDescription" id="dishDescription" class="form-control" rows="3"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="dishPrice">Dish Price</label>
+        <input formControlName="dishPrice" id="dishPrice" type="number" class="form-control" step="0.01">
+      </div>
+
+      <div class="form-group">
+        <label for="inventory">Inventory</label>
+        <input formControlName="inventory" id="inventory" type="number" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="available">Available</label>
+        <select formControlName="available" id="available" class="form-control">
+          <option [ngValue]="true">Yes</option>
+          <option [ngValue]="false">No</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dishImageurl">Dish Image URL</label>
+        <input formControlName="dishImageurl" id="dishImageurl" type="text" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="dishEditForm.invalid">Update Dish</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelEditForm()">Cancel</button>
+    </form>
+  </div>

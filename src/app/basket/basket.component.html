@@ -1,0 +1,56 @@
+<div class="basket-container ">
+  <div *ngIf="!orderPlaced; else processingOrThankYouMessage">
+    <div *ngIf="dishesInBasket.length > 0; else emptyBasket" class="page">
+      <h2>Your Basket</h2>
+      <div class="restaurant-card">
+        <div class="dish-list">
+          <div *ngFor="let dish of dishesInBasket" class="dish-card">
+            <div class="dish-name">
+              <img src="assets/dish_images/{{dish.dish_image_url}}" alt="Restaurant Image"
+                class="restaurant-image-small">
+              <h3 class="dish-name">{{ dish.dish_name }}</h3>
+            </div>
+            <div class="dish-info">
+              <div class="counter">
+                <span (click)="decrementQuantity(dish)" class="counter-button">-</span>
+                <span class="quantity">{{ dish.quantity }}</span>
+                <span (click)="incrementQuantity(dish)" class="counter-button">+</span>
+              </div>
+              <p>Price: <span class="price">{{ dish.dish_price | currency:'INR':'symbol' }}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="order-total">
+        <h3>Total Price: <span class="total-price">{{ totalPrice | currency:'INR':'symbol' }}</span></h3>
+      </div>
+      <button (click)="placeOrder()" class="place-order-button">Place Order</button>
+    </div>
+    
+  </div>
+
+  <!-- Processing and Thank You message -->
+  <ng-template #processingOrThankYouMessage>
+    <div *ngIf="isProcessingOrder; else thankYouMessage">
+      <div class="processing-message">
+        <div class="spinner"></div> <!-- Spinner animation -->
+        <p>Processing your order...</p>
+      </div>
+    </div>
+
+    <ng-template #thankYouMessage>
+      <div class="thank-you-message">
+        <img src="assets/dish_images/success.png" alt="Success" class="success-icon" />
+        <h2>Thank you for your order!</h2>
+        <p>Your order has been placed successfully.</p>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>
+  <ng-template #emptyBasket >
+    <div id="empty-basket">
+    <img src="../../assets/dish_images/empty-basket.png" class="empty-image">
+  </div>
+
+    <!-- <p>Your basket is empty.</p> -->
+  </ng-template>

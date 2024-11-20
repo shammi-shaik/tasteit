@@ -1,0 +1,38 @@
+<div class="form">
+<div *ngIf="profileForm" class="profile-form-container">
+    <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+      <div class="form-group mb-3">
+        <div id= "icon" >
+          <i  class="fa-solid fa-user"></i> 
+
+        </div>
+        <label for="userName"><strong>User Name:</strong></label>
+        <input id="userName" type="text" formControlName="user_name" class="form-control"[readonly]="!isEditing"/>
+      </div>
+  
+      <div class="form-group mb-3">
+        <label for="email"><strong>Email:</strong></label>
+        <input id="email" type="email" formControlName="email" class="form-control" [readonly]="!isEditing"/>
+      </div>
+  
+      <div class="form-group mb-3">
+        <label for="phoneNumber"><strong>Phone Number:</strong></label>
+        <input id="phoneNumber" type="text" formControlName="phone_number" class="form-control" [readonly]="!isEditing"/>
+      </div>
+  
+      <div class="d-flex gap-2">
+        <button type="button" class="btn btn-secondary" (click)="toggleEditMode()">
+          {{ isEditing ? 'Cancel' : 'Edit' }}
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="!isEditing || profileForm.invalid">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Error Message if loading fails -->
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+  {{ errorMessage }}
+</div>

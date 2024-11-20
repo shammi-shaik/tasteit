@@ -1,0 +1,119 @@
+<nav>
+    <div class="logo-name">
+        <span class="logo_name">TASTE IT</span>
+    </div>
+
+    <div class="menu-items">
+        <ul class="nav-links">
+            <li><a>
+                    <i class="uil uil-estate"></i>
+                    <span class="link-name">Dashboard</span>
+                </a></li>
+            <li><a routerLink="/login">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="dashboard">
+    <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+        <div class="search-box">
+            <i class="uil uil-search"></i>
+            <input type="text" placeholder="Search here...">
+        </div>
+    </div>
+
+    <div class="dash-content">
+        <div class="overview">
+            <div class="title">
+                <i class="uil uil-tachometer-fast-alt"></i>
+                <span class="text">Dashboard</span>
+            </div>
+
+            <div class="boxes">
+                <a (click)="setView('pendingRequests')" class="box box1">
+                    <i class="uil uil-user"></i>
+                    <span class="text">Pending Requests</span>
+                </a>
+                
+                <a (click)="setView('Restaurants')" class="box box2">
+                    <i class="uil uil-user"></i>
+                    <span class="text">Sellers</span>
+                </a>
+                <a (click)="setView('Listusers')" class="box box3">
+                    <i class="uil uil-edit"></i>
+                    <span class="text">Customers</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Pending Requests Section -->
+        <div *ngIf="currentView === 'pendingRequests'" class="admin-container">
+            <h2>Pending Restaurant Requests</h2>
+
+            <div *ngIf="pendingRestaurants.length === 0">
+                <p>No pending restaurants found.</p>
+            </div>
+
+            <div *ngFor="let restaurant of pendingRestaurants" class="restaurant-card">
+                <img src="../../assets/restaurant_images/{{restaurant.restaurant_image_url}}"
+                    alt="{{ restaurant.name }}" class="card-image">
+                <div class="restaurant-details">
+                    <h3>{{ restaurant.restaurant_name }}</h3>
+                    <p><strong>Address:</strong> {{ restaurant.restaurant_address }}</p>
+                    <p><strong>Phone:</strong> {{ restaurant.restaurant_phone }}</p>
+                    <p><strong>Status:</strong> {{ restaurant.status_name }}</p>
+                    <button (click)="approveRestaurant(restaurant.restaurant_id)" class="btn-approve">Approve</button>
+                    <button (click)="deleteRestaurant(restaurant.restaurant_id)" class="btn-reject">Reject</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Restaurant List Section -->
+        <div *ngIf="currentView === 'Restaurants'" class="admin-container">
+            <h2>Total Restaurants</h2>
+
+            <div *ngIf="Restaurants.length === 0">
+                <p>No restaurants found.</p>
+            </div>
+
+            <div *ngFor="let restaurant of Restaurants" class="restaurant-card">
+                <img src="../../assets/restaurant_images/{{restaurant.restaurant_image_url}}"
+                    alt="{{ restaurant.name }}" class="card-image">
+                <div class="restaurant-details">
+                    <h3>{{ restaurant.restaurant_name }}</h3>
+                    <p><strong>Address:</strong> {{ restaurant.restaurant_address }}</p>
+                    <p><strong>Phone:</strong> {{ restaurant.restaurant_phone }}</p>
+                    <p><strong>Status:</strong> {{ restaurant.status_name }}</p>
+                    <button (click)="deleteRestaurant(restaurant.restaurant_id)" class="btn-reject">Delete</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div *ngIf="currentView === 'Listusers'" class="admin-container">
+            <h2>List of Users</h2>
+
+            <div *ngIf="Restaurants.length === 0">
+                <p>No users found.</p>
+            </div>
+
+            <div *ngFor="let user of Listusers" class="restaurant-card">
+                <div class="restaurant-details">
+                    <h3>{{ user.user_name }}</h3>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Phone:</strong> {{ user.phone_number }}</p>
+                    <p><strong>Role:</strong> {{ user.role_name }}</p>
+                    <!-- <button (click)="rejectRestaurant(user.restaurant_id)" class="btn-reject">Disable</button> -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</section>

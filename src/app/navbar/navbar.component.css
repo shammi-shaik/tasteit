@@ -1,0 +1,115 @@
+/* Basic Navbar styles */
+nav {
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color:#ffffff;
+    padding: 10px 10%;
+    box-shadow: 0 4px 8px #0000001a;
+    justify-content:space-between;
+    height: 9vh;
+}
+.active-link {
+    color: #4CAF50;  /* Color for the active link */
+    font-weight:bolder;
+    border-bottom: 2px solid #4CAF50;  
+}
+
+/* Navbar content wrapper */
+.navbar-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    /* justify-content: space-between; */
+
+}
+
+/* Logo */
+.logo {
+    height: 60px; /* Increased height */
+    margin-right: 20px; /* Gap between logo and links */
+    display: flex;
+}
+
+/* Hamburger icon - hidden by default */
+.hamburger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+.fa-solid{
+    margin-right: 8px;
+}
+/* Navbar list */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Ensures wrapping if needed */
+}
+
+/* Navbar items */
+nav ul li {
+    margin-right: 50px;
+    font-size: 15px;
+}
+
+/* Links inside the navbar */
+nav ul li a {
+    text-decoration: none;
+    color: black; /* Keep the links and icons black */
+    position: relative;
+    /* padding-left: 25px; */
+}
+
+/* Icon Styles - Use ::before to insert icons */
+nav ul li a::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: black; /* Ensure the icon is black */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    /* Hide the normal nav links */
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        background-color: white; /* Ensure background is consistent */
+    }
+
+    /* Show the hamburger icon */
+    .hamburger {
+        display: block;
+    }
+
+    /* Show the menu when hamburger is clicked */
+    .show-menu {
+        display: flex;
+    }
+
+    .hide-menu {
+        display: none;
+    }
+
+    /* Adjust the style of links in mobile view */
+    nav ul li {
+        margin: 10px 0;
+        padding: 10px;
+        text-align: left;
+    }
+
+    /* Center the logo and hamburger in mobile view */
+    nav {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

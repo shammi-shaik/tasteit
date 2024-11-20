@@ -1,0 +1,117 @@
+/* /* restaurant-cards.component.css */
+.restaurant-cards-container {
+  background-color: white;
+  padding: 20px;
+  height:72vh;
+  margin-bottom: 1px;
+  overflow: scroll;
+}
+.restaurant-cards-container::-webkit-scrollbar{
+  display: none;
+}
+
+
+.heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.no-result{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.card-box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1475px;
+}
+
+.card {
+  /* flex: 1 1 calc(20% - 30px); Card size reduced by 25% */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Default shadow */
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff; /* Background color to blend with container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+  width: 275px;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slightly increases the card size */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Deeper shadow on hover for more depth effect */
+}
+
+.card-image {
+  width: 100%;
+  height: 300px;
+}
+
+.card-content {
+  padding: 10px;
+}
+
+.card-title {
+  font-size: 18px;
+  margin: 0;
+}
+
+
+.siva{
+  display: flex;
+  /* justify-content: center; */
+  max-width: 80%;
+  margin: auto;
+  justify-content: flex-end;
+
+
+}
+/* Search Bar Container */
+.search-bar-container {
+    display: flex;
+    padding-top: 40px;
+    margin-bottom: 10px;
+}
+
+/* Search Input */
+.search-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px 0 0 20px; /* Rounded left corners */
+    outline: none;
+    width: 400px; /* Adjust width as needed */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+/* Search Button */
+.search-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #158AB1;
+    color: white;
+    border-radius: 0 20px 20px 0; /* Rounded right corners */
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: -1px; /* Removes border gap */
+}
+
+.search-button:hover {
+    background-color: #1ca3d0;
+}
+
+/* Responsive Search Bar */
+@media (max-width: 500px) {
+    .search-input {
+        width: 100%; /*Full width on smaller screens*/
+    }
+}
+

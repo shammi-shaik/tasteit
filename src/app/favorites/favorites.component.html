@@ -1,0 +1,24 @@
+<div *ngIf="favoriteRestaurants && favoriteRestaurants.length > 0">
+  <div class="favorite-container-bg">
+    <div class="favorite-container">
+      <h2>Your Favorite Restaurants</h2>
+      <ng-container *ngFor="let restaurant of favoriteRestaurants">
+        <div class="favorite-card">
+          <img [src]="restaurant.imageUrl || 'assets/restaurant_images/default.jpeg'" alt="{{ restaurant.name }}"
+            class="restaurant-image">
+          <div class="restaurant-info">
+            <h3>{{ restaurant.name }}</h3>
+            <button class="btn btn-danger"
+              (click)="removeFromFavorite(restaurant.restaurant_id, restaurant.name)">Remove</button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Display when there are no favorite restaurants available -->
+<div *ngIf="!favoriteRestaurants || favoriteRestaurants.length === 0" class="no-favorites">
+  <img src="../../assets/dish_images/no-result.jpg">
+  <p>No favorite restaurants found.</p>
+</div>

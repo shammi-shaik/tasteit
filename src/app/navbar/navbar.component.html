@@ -1,0 +1,37 @@
+<!-- Navbar container with dynamic class based on user role -->
+<nav [ngClass]="{'customer-role': userRole === 'customer', 'seller-role': userRole === 'seller', 'admin-role': userRole === 'admin'}">
+    <div class="navbar-content">
+      <div>
+        <img src="assets/restaurant_images/Screenshot from 2024-09-18 22-18-37.png" alt="Logo" class="logo">
+      </div>
+      
+
+      <div >
+        <div class="hamburger" (click)="toggleMenu()">
+          &#9776; <!-- Unicode for hamburger icon -->
+        </div>
+        <ul [ngClass]="{'show-menu': isMenuOpen, 'hide-menu': !isMenuOpen}">        <!-- Common Links for all users -->
+
+          <!-- Links based on user role -->
+          <li *ngIf="userRole === 'customer'"><a routerLink="/home" routerLinkActive="active-link"><i class="fa-solid fa-house"></i>Home</a></li>
+          <li *ngIf="userRole === 'customer'"><a routerLink="/basket" routerLinkActive="active-link"><i class="fa-solid fa-basket-shopping"></i>Basket</a></li>
+          <li *ngIf="userRole === 'customer'"><a routerLink="/my-orders" routerLinkActive="active-link"><i class="fa-solid fa-check"></i>My Orders</a></li>
+          <li *ngIf="userRole === 'customer'"><a routerLink="/favorites" routerLinkActive="active-link"><i class="fa-solid fa-heart"></i>Favorites</a></li>
+          <li *ngIf="userRole === 'customer'"><a routerLink="/profile" routerLinkActive="active-link"><i class="fa-solid fa-user"></i>{{userName}}</a></li>
+
+    
+    
+          <li *ngIf="userRole === 'seller'"><a routerLink="/seller-dashboard" routerLinkActive="active-link" ><i class="fa-solid fa-table-columns"></i>Dashboard</a></li>
+          <li *ngIf="userRole === 'seller'"><a routerLink="/review-ratings" routerLinkActive="active-link"><i class="fa-solid fa-star"></i>Reviews & Ratings</a></li>
+          <li *ngIf="userRole === 'seller'"><a routerLink="/seller-orders" routerLinkActive="active-link"><i class="fa-solid fa-check"></i>My Orders</a></li>
+          <li *ngIf="userRole === 'seller'"><a routerLink="/profile" routerLinkActive="active-link"><i class="fa-solid fa-user"></i>{{userName}}</a></li>
+          
+            <!-- Logout Link (visible to all logged-in users) -->
+          <li *ngIf="userRole"><a href="#" (click)="logout()" class="logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+        </ul>
+    </div>
+    </div>
+  </nav>
+
+
+      

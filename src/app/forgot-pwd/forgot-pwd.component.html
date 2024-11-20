@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="d-flex justify-content-center align-items-center h-100">
+    <div class="boxgrad p-5">
+      <h2 class="forgot-txt">Forgot Password</h2>
+      <p>Please enter your email address to reset your password:</p>
+
+      <!-- Step 1: Enter Email -->
+      <form [formGroup]="emailForm"(ngSubmit)="onEmailSubmit()">
+          <label for="email">Email:</label>
+          <input type="email" id="email" formControlName="email" class="form-control" >
+          <button type="submit" class="btn"  >Send OTP</button>
+          <button type="submit" class="btn btn-secondary" (click)="navigateToLogin()">Back</button>
+        <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+      </form>
+
+     <!-- OTP Modal -->
+<div *ngIf="isOtpSent && !isPasswordReset" class="modal" tabindex="-1" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form [formGroup]="otpForm" (ngSubmit)="onOtpSubmit()">
+          <p>We have sent an OTP to your email. Please check your inbox and enter the OTP below.</p>
+          <input type="text" formControlName="otp" placeholder="Enter OTP" class="form-control" />
+          <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Verify OTP</button>
+            <p>OTP expires in: {{ displayTime }}</p>
+            <button type="button" class="btn btn-secondary" (click)="closeForgotPasswordModal()">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reset Password Modal -->
+<div *ngIf="isPasswordReset" class="modal" tabindex="-1" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3>Reset Password</h3>
+        <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSubmit()">
+          <input
+            formControlName="newPassword"
+            placeholder="New Password"
+            type="password"
+            class="form-control"
+            [ngClass]="{'error-input': passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched}"
+          />
+          <input
+            formControlName="confirmPassword"
+            placeholder="Confirm Password"
+            type="password"
+            class="form-control"
+          />
+          <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Reset Password</button>
+            <button type="button" class="btn btn-secondary" (click)="closeForgotPasswordModal()">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

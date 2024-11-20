@@ -1,0 +1,200 @@
+.dish-container {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  margin: 20px 0;
+}
+
+.dish-container::-webkit-scrollbar{
+  display: none;
+  }
+
+.dish-container-bg{
+  display: flex;
+  justify-content: center;
+  /* padding: 20px; */
+  margin-top: 10px;
+  overflow: scroll;
+  height: 65vh;
+}
+.noDishes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 66vh;
+}
+  
+.dish-card {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #e0e0e0;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+  
+  .dish-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+
+  }
+  
+  .dish-info {
+    margin: 20px;
+    width: 80%;
+  }
+  
+  .dish-info h3 {
+    margin: 0;
+  }
+  
+  .add-button {
+    background-color: #1fa817;
+    width: 150px;
+    color: white;
+    border: green;
+    font-size: 20px;
+    font-weight: 500;
+    padding:10px;
+    border-radius: 10px;
+    cursor: pointer;
+    
+  }
+
+
+  .disable-button{
+    background-color: #719d76!important;
+  }
+  
+  .add-button:hover {
+    background-color: green;
+  }
+  .counter {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    gap: 10px;
+  }
+  
+  .counter-button {
+    background-color:#1fa817;
+    width: 40 px;
+    color: white;
+    border: green;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .counter-button:hover {
+    background-color: green;
+  }
+  
+  .count {
+    font-size: 1.4em;
+    font-weight: bold;
+
+  } 
+
+  .favorites-button {
+    background-color: #ff6347; /* Tomato color */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    /* margin-top: 10px; */
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .favorites-button:hover {
+    background-color: #ff4500; /* Darker shade on hover */
+  }
+  .restaurant{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    padding: 20px;
+
+  }
+  .restaurant h2{
+    padding: 0%;
+    margin: 0%;
+  
+  }
+  
+/* Search Bar Container */
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+/* Search Input */
+.search-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px 0 0 20px; /* Rounded left corners */
+  outline: none;
+  width: 400px; /* Adjust width as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Search Button */
+.search-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #158AB1;
+  color: white;
+  border-radius: 0 20px 20px 0; /* Rounded right corners */
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: -1px; /* Removes border gap */
+}
+
+.search-button:hover {
+  background-color: #1ca3d0;
+}
+
+/* Responsive Search Bar */
+@media (max-width: 500px) {
+  .search-input {
+      width: 100%; /*Full width on smaller screens*/
+  }
+}
+
+
+.dish-type-toggle {
+  text-align: center;
+  margin-top: 30px;
+
+}
+
+.dish-type-toggle button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: #158AB1;
+  color: white;
+  border-radius: 8px;
+
+}
+
+.dish-type-toggle button:hover {
+  background-color: #82b8ca;
+}
+

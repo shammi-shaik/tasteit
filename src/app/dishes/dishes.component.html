@@ -1,0 +1,67 @@
+<div class="search-bar-container">
+  <input type="text" [(ngModel)]="searchQuery" placeholder="Search..." (keyup.enter)="onSearch()" class="search-input">
+  <button (click)="onSearch()" class="search-button">Search</button>
+</div>
+
+<div class="dish-type-toggle">
+  <button (click)="toggleDishType('All')">All Dishes</button>
+  <button (click)="toggleDishType('Veg')">Veg Dishes</button>
+  <button (click)="toggleDishType('Non-Veg')">Non-Veg Dishes</button>
+</div>
+<div *ngIf="filteredDishes && filteredDishes.length > 0; else noDishes">
+  <!-- <div *ngIf="noResultsMessage" class="no-results-message">
+    <div class="no-result">
+      <img src="../../assets/dish_images/no-result.jpg">
+    </div>
+    <p>{{ noResultsMessage }}</p> 
+  </div> -->
+  <div class="dish-container-bg">
+    <div class="dish-container">
+      <div class="restaurant">
+        <h2>{{ restaurantName | titlecase }} Dishes</h2>
+        <button (click)="addToFavorites()" *ngIf="isVisible" class="favorites-button">
+          {{text}}
+        </button>
+        <button (click)="removeFromFavorite()" *ngIf="!isVisible" class="favorites-button">
+          {{text}}
+        </button>
+      </div>
+      <ng-container *ngFor="let dish of filteredDishes">
+        <div class="dish-card">
+          <img src="../../assets/dish_images/{{dish.dish_image_url}}" alt="{{ dish.dish_name }}" class="dish-image">
+          <div class="dish-info">
+            <h3>{{ dish.dish_name }} </h3>
+            <p>₹ {{ dish.dish_price }}</p>
+            <p>{{ dish.dish_description }}</p>
+
+          </div>
+
+          <!-- Counter Section -->
+          <div *ngIf="dish.quantity > 0; else addButtonTemplate" class="counter">
+            <span (click)="decrementQuantity(dish)" class="counter-button">-</span>
+            <span class="count">{{ dish.quantity }}</span>
+            <span (click)="incrementQuantity(dish)" class="counter-button">+</span>
+          </div>
+
+
+          <!-- <button class="btn btn-primary"  type="submit" (click)="addDish(dish)" [disabled]="dish.is_empty">ADD</button> -->
+          <!-- ADD Button -->
+          <ng-template #addButtonTemplate>
+            <button type="submit" (click)="addDish(dish)" [disabled]="dish.is_empty"
+              [class.disable-button]="dish.is_empty" class="add-button">ADD</button>
+          </ng-template>
+        </div>
+
+      </ng-container>
+      <div *ngIf="errorMessage">{{errorMessage}}</div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #noDishes>
+  <div class="noDishes">
+    <img src="../../assets/dish_images/no-result.jpg">
+    <p>No dishes found for the selected type.</p>
+  </div>
+</ng-template>

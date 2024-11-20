@@ -1,0 +1,18 @@
+<!-- Main content of the app -->
+
+<div>
+    <!-- Only show navbar if the current route is not login, signup, or forgot password -->
+  <ng-container *ngIf="!shouldHideNavAndFooter()">
+    <app-navbar id="nav"></app-navbar>
+  </ng-container>
+
+    <router-outlet id="body"></router-outlet>
+
+    <!-- Only show footer if the current route is not login, signup, or forgot password -->
+  <ng-container *ngIf="!shouldHideNavAndFooter()">
+    <app-footer-customer id="footer"></app-footer-customer>
+  </ng-container>
+
+    
+</div>
+

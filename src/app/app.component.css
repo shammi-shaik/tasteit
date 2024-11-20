@@ -1,0 +1,15 @@
+/* #nav{
+ position: fixed;
+ display: flex;
+} */
+
+
+#footer{
+    z-index: 1001 !important;
+}
+#nav{
+    margin-bottom: 40vh !important;
+}
+#body{
+    margin-top: 100vh;
+}

@@ -1,0 +1,132 @@
+<div id="sectionsignup" class="container">
+  <div class="signup-form-container">
+    <div class="form-section">
+      <h2 class="form-title">Signup Form</h2>
+
+      <!-- Role Selection as Radio Buttons -->
+      <div class="role-selection">
+        <div class="form-check">
+          <input type="radio" name="userRole" id="roleCustomer" value="customer" [(ngModel)]="selectedRole" (change)="onRoleChange()" required>
+          <label for="roleCustomer">Customer</label>
+        </div>
+
+        <div class="form-check">
+          <input type="radio" name="userRole" id="roleSeller" value="seller" [(ngModel)]="selectedRole" (change)="onRoleChange()" required>
+          <label for="roleSeller">Seller</label>
+        </div>
+      </div>
+
+      <!-- Customer Registration Form -->
+      <div *ngIf="selectedRole === 'customer'">
+        <form [formGroup]="customerSignupForm" (ngSubmit)="onCustomerSubmit()">
+          <div class="form-group">
+            <label for="userName">User Name</label>
+            <input type="text" id="userName" placeholder="User Name" formControlName="userName" required>
+            <div *ngIf="customerSignupForm.get('userName')?.invalid && customerSignupForm.get('userName')?.touched" class="error-message">
+              User Name is required.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="tel" id="phoneNumber" placeholder="Phone Number" formControlName="phoneNumber" required>
+            <div *ngIf="customerSignupForm.get('phoneNumber')?.errors?.['pattern']" class="error-message">
+              Phone Number must be valid.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="userEmail">Email</label>
+            <input type="email" id="userEmail" placeholder="Email Address" formControlName="userEmail" required>
+            <div *ngIf="customerSignupForm.get('userEmail')?.invalid && customerSignupForm.get('userEmail')?.touched" class="error-message">
+              Enter a valid email address.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="userPassword">Password</label>
+            <input type="password" id="userPassword" placeholder="Password" formControlName="userPassword" required>
+            <!-- <div *ngIf="customerSignupForm.get('userPassword')?.invalid && customerSignupForm.get('userPassword')?.touched" class="error-message">
+              Password is required.
+            </div> -->
+            <span *ngIf="customerSignupForm.get('userPassword')?.errors?.['passwordLength']">Password must be between 8 and 16 characters.</span>
+            <span *ngIf="customerSignupForm.get('userPassword')?.errors?.['passwordComplexity']">Password must contain at least one numeric character and one symbol.</span>
+          </div>
+
+          <div class="form-buttons">
+            <button type="button" class="back-button" (click)="navigateToLogin()">Back</button>
+            <button type="submit" class="submit-button" >Sign Up</button>
+          </div>
+          <div *ngIf="errorMessage">{{errorMessage}}</div>
+        </form>
+      </div>
+
+      <!-- Restaurant Registration Form -->
+      <div *ngIf="selectedRole === 'seller'">
+        <form [formGroup]="restaurantSignupForm" (ngSubmit)="onRestaurantSubmit()" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="userName">User Name</label>
+            <input type="text" id="userName" placeholder="User Name" formControlName="userName" required>
+            <div *ngIf="restaurantSignupForm.get('userName')?.invalid && restaurantSignupForm.get('userName')?.touched" class="error-message">
+              User Name is required and must be at least 3 characters.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="restaurantName">Restaurant Name</label>
+            <input type="text" id="restaurantName" placeholder="Restaurant Name" formControlName="restaurantName" required>
+            <div *ngIf="restaurantSignupForm.get('restaurantName')?.invalid && restaurantSignupForm.get('restaurantName')?.touched" class="error-message">
+              Restaurant Name is required and must be at least 3 characters.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="restaurantAddress">Restaurant Address</label>
+            <textarea id="restaurantAddress" placeholder="Restaurant Address" formControlName="restaurantAddress" required></textarea>
+            <div *ngIf="restaurantSignupForm.get('restaurantAddress')?.invalid && restaurantSignupForm.get('restaurantAddress')?.touched" class="error-message">
+              Restaurant Address is required and must be at least 5 characters.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="restaurantPhone">Phone Number</label>
+            <input type="tel" id="restaurantPhone" placeholder="Phone Number" formControlName="restaurantPhone" required>
+            <div *ngIf="restaurantSignupForm.get('restaurantPhone')?.errors?.['pattern']" class="error-message">
+              Phone Number must be valid.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="restaurantEmail">Email</label>
+            <input type="email" id="restaurantEmail" placeholder="Email Address" formControlName="restaurantEmail" required>
+            <div *ngIf="restaurantSignupForm.get('restaurantEmail')?.invalid && restaurantSignupForm.get('restaurantEmail')?.touched" class="error-message">
+              Enter a valid email address.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="restaurantPassword">Password</label>
+            <input type="password" id="restaurantPassword" placeholder="Password" formControlName="restaurantPassword" required>
+            <!-- <div *ngIf="restaurantSignupForm.get('restaurantPassword')?.invalid && restaurantSignupForm.get('restaurantPassword')?.touched" class="error-message">
+              Password is required and must be at least 8 characters.
+            </div> -->
+            <span *ngIf="restaurantSignupForm.get('restaurantPassword')?.errors?.['passwordLength']">Password must be between 8 and 16 characters.</span>
+            <span *ngIf="restaurantSignupForm.get('restaurantPassword')?.errors?.['passwordComplexity']">Password must contain at least one numeric character and one symbol.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="restaurantImageUrl">Restaurant Image</label>
+            <input type="file" id="restaurantImageUrl" (change)="onFileChange($event)">
+            <div *ngIf=" fileErrorMessage" class="error-message">{{  fileErrorMessage }}</div>
+          </div>
+
+          <div class="form-buttons">
+            <button type="button" class="back-button" (click)="navigateToLogin()">Back</button>
+            <button type="submit" class="submit-button" >Register</button>
+          </div>
+          <div *ngIf="errorMessage!=null">{{errorMessage}}</div>  
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

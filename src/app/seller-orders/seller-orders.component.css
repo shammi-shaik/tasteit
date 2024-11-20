@@ -1,0 +1,104 @@
+.order-container-bg {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  overflow:scroll;
+  height: 82vh;
+}
+.order-container {
+  max-width: 600px;
+  width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 0px;
+  height: fit-content;
+}
+
+.order-card {
+  display: flex;
+  align-items:center;
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+
+}
+
+.order-card:hover {
+  transform: translateY(-5px);
+}
+
+.order-header {
+  display: flex;
+  align-items: center;
+}
+
+.dish-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.order-info {
+  flex-grow: 1;
+  display: flex;
+}
+
+.order-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.quantity,
+.price,
+.description {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #555;
+}
+
+.delivery-status {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.status-delivered {
+  font-size: 24px;
+  color: green;
+  margin-left: 10px;
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+  .order-card {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .dish-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .dish-name,
+  .quantity,
+  .price,
+  .description {
+    font-size: 14px;
+  }
+}

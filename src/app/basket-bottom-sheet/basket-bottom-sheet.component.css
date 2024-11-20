@@ -1,0 +1,21 @@
+.basket{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 700px;
+
+}
+.view-basket-button {
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  width: 100px;
+}
+
+.view-basket-button:hover {
+  background-color: #e73370;
+}
+

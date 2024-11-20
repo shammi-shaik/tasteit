@@ -1,0 +1,107 @@
+<div class="signup-container">
+  <form [formGroup]="customerSignUpForm" (ngSubmit)="onCustomerSubmit()">
+    <h2>Customer Signup</h2>
+
+    <!-- Name -->
+    <label for="userName">Name</label>
+    <input type="text" id="userName" formControlName="userName" placeholder="Enter your name">
+
+
+    <!-- Email -->
+    <label for="userEmail">Email</label>
+    <input type="email" id="userEmail" formControlName="userEmail" placeholder="Enter your email">
+
+
+    <!-- Password -->
+    <label for="userPassword">Password</label>
+    <input type="password" id="userPassword" formControlName="userPassword" placeholder="Enter your password">
+
+
+    <!-- Phone -->
+    <label for="userPhone">Phone</label>
+    <input type="text" id="userPhone" formControlName="userPhone" placeholder="Enter your phone number">
+
+
+    <!-- Address -->
+    <label for="userAddress">Address</label>
+    <textarea id="userAddress" formControlName="userAddress" placeholder="Enter your address">
+      </textarea>
+
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" >Sign Up</button>
+  </form>
+</div>
+
+
+
+<div class="signup-container">
+  <form [formGroup]="customerLoginForm" (ngSubmit)="onCustomerLogin()">
+    <h2>Customer Login</h2>
+
+  
+
+    <!-- Email -->
+    <label for="userEmail">Email</label>
+    <input type="email" id="userEmail" formControlName="userEmail" placeholder="Enter your email">
+
+
+    <!-- Password -->
+    <label for="userPassword">Password</label>
+    <input type="password" id="userPassword" formControlName="userPassword" placeholder="Enter your password">
+
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" >Login</button>
+  </form>
+</div>
+
+
+<button type="submit" class="btn"  (click)="getDetails()">Get</button>
+<div *ngIf="isDisplay">
+  <table >
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr >
+        <td>{{ users.user_name }}</td>
+        <td>{{ users.email }}</td>
+        <td>{{ users.phone }}</td>
+        <td>{{ users.address }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <h1>{{users.email}}</h1> -->
+</div>
+
+<button (click)="getlistUser()" type="submit" class="btn">Get list</button>
+<div  *ngIf="isDisplay">
+  <div *ngFor="let user of listusers" >
+    <div >
+        <h3>{{ user.user_name }}</h3>
+        <p><strong>Address:</strong> {{ user.address }}</p>
+        <p><strong>Phone:</strong> {{ user.phone }}</p>
+        <p><strong>Status:</strong> {{ user.email }}</p>
+    </div>
+  </div>
+
+</div>
+
+<button (click)="navigateToLogin()" type="submit" class="btn">forgot</button>
+

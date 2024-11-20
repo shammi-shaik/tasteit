@@ -1,0 +1,32 @@
+<!-- restaurant-cards.component.html -->
+  <!-- Search Bar Component -->
+   <div class="siva">
+    <div class="search-bar-container">
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Search..." (keyup.enter)="onSearch()" class="search-input">
+      <button (click)="onSearch()" class="search-button">Search</button>
+    </div>
+   </div>
+
+<div class="d-flex flex-row justify-content-center">
+<div class="restaurant-cards-container">
+  <h2 class="heading">Top restaurant chains near you</h2>
+
+  <!-- Display no results message if there are no matching restaurants -->
+  <div *ngIf="noResultsMessage" class="no-results-message">
+    <div class="no-result">
+      <img src="../../assets/dish_images/no-result.jpg">
+    </div>
+<!-- <p>{{ noResultsMessage }}</p>  -->
+  </div>
+    <div class="card-box">
+      <div class="card"  *ngFor="let restaurant of filteredRestaurants"(click)="selectRestaurant(restaurant)">
+        <a [routerLink]="['/dishes', restaurant.restaurant_id, restaurant.restaurant_name]">
+        <img src="../../assets/restaurant_images/{{restaurant.restaurant_image_url}}" alt="{{ restaurant.name }}" class="card-image">
+      </a>
+        <div class="card-content">
+          <h3 class="card-title">{{ restaurant.restaurant_name }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+/* footer.component.css */
+.footer {
+    background-color: rgb(6, 6, 6);
+    color: white;
+    padding: 25px 0;
+    text-align: center;
+    height: 9vh;
+    z-index: 1001;
+
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .footer-content a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer-content a:hover {
+    text-decoration: underline;
+  }
+  

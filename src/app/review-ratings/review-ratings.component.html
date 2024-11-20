@@ -1,0 +1,57 @@
+<div class="restaurant-reviews">
+  <!-- Rating Overview Section -->
+  <div class="rating-overview-section">
+    <!-- Left Column: Total Likes and Average Rating -->
+    <div class="left-column">
+      <div class="like-count-section">
+        <h3>Total Likes</h3>
+        <p class="like-count">People liked: {{ totalLikes }}</p>
+      </div>
+
+      <div class="average-rating">
+        <h2>Average Rating</h2>
+        <div class="stars">
+          <ng-container *ngFor="let star of getuserStars(averageRating)">
+            <span class="star fa-star" [ngClass]="star"></span>
+          </ng-container>
+        </div>
+        <p class="average-score">{{ averageRating.toFixed(1) }}/5</p>
+      </div>
+    </div>
+
+    <!-- Right Column: Rating Breakdown -->
+    <div class="rating-breakdown">
+      <h3>Rating Breakdown</h3>
+      <div class="rating-bar" *ngFor="let count of ratingCounts; let i = index">
+        <span>{{ i + 1 }} ★</span>
+        <div class="bar">
+          <div class="filled" [style.width]="getBarWidth(i)"></div>
+        </div>
+        <span class="count">{{ count }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <div class="reviews-section">
+    <h3>User Reviews</h3>
+    <div class="reviews-cards">
+      <div *ngFor="let review of reviews" class="review-card">
+        <div class="review-header">
+          <!-- <div class="user-box"> -->
+            <i class="fa-solid fa-user user-icon"></i>
+          <!-- </div> -->
+          <span class="user-name">{{ review.user_name }}</span>
+          <div class="description">
+          <p class="review-description">{{ review.review_description }}</p>
+          </div>
+          <span class="user-rating">
+            <ng-container *ngFor="let star of getuserStars(review.rating_value)">
+              <span class="fa-star star" [ngClass]="star"></span>
+            </ng-container>
+          </span>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

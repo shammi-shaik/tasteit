@@ -1,0 +1,24 @@
+<div class="order-container-bg">
+  <div class="order-container">
+    <h2>My orders</h2>
+    <div *ngFor="let order of Mydishes" class="order-card">
+      <div class="order-header">
+        <img [src]="'../../assets/dish_images/' + order.dish_image_url" alt="Dish Image" class="dish-image">
+        
+        <div class="order-info">
+          <div class="order-details">
+            <h3 class="dish-name">Dish Name: {{ order.dish_name }}</h3>
+            <p class="quantity">Quantity: {{ order.quantity }}</p>
+            <p class="price">Price: {{ order.total_price | currency: 'INR' }}</p>
+            <p class="description">{{ order.dish_description }}</p>
+            <p>{{ order.order_time | date: 'short' }}</p> 
+            <p>ORDER#{{order.order_id}}</p>
+          </div>
+          <div class="delivery-status">
+            <span class="status-delivered">Delivered ✔</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

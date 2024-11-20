@@ -1,0 +1,38 @@
+<div class="container">
+  <header class="header">
+    <h1>Taste It</h1>
+  </header>
+
+  <div class="content">
+    <div class="image-section">
+      <img src="../../assets/restaurant_images/white bottle.avif" alt="Food Image" class="food-image" />
+    </div>
+
+    <div class="form-section">
+      <h2 class="sign-up-heading">LOGIN</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <label for="contactInput" class="form-label">Email address or Phone number</label>
+          <input type="text" placeholder="Email or Phone number" class="form-control" id="contactInput" formControlName="contact" required />
+        </div>
+
+        <div class="input-group">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" placeholder="Password" class="form-control" id="exampleInputPassword"
+            formControlName="password" required />
+        </div>
+
+        <button id="Submit" type="submit" class="submit-button">Submit</button>
+
+        <div class="d-flex mt-3 sign-forget">
+          <a routerLink="/signup">New around here? Sign up</a>
+          <a routerLink="/forgot-pwd">Forgot Password?</a>
+        </div>
+
+        <div id="error-message" class="text-danger mt-3" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
